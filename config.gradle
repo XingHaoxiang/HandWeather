@@ -1,3 +1,7 @@
+/**
+ * 全局配置文件，以后直接修改此处就可以
+ */
+
 ext {
     android = [
             buildToolsVersion : '25.0.3',
