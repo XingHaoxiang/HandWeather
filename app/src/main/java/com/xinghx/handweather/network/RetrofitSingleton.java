@@ -1,7 +1,6 @@
 package com.xinghx.handweather.network;
 
 import com.xinghx.handweather.constants.Const;
-import com.xinghx.handweather.constants.utils.RxUtil;
 import com.xinghx.handweather.constants.utils.ToastUtil;
 import com.xinghx.handweather.modules.main.domain.Weather;
 import com.xinghx.handweather.modules.main.domain.WeatherApi;
@@ -11,9 +10,11 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -69,6 +70,10 @@ public class RetrofitSingleton {
                 .build();
     }
 
+    public Observable<WeatherApi> weatherApi(String city) {
+        return sWeatherAllApi.weatherAll(city, Const.WEATHERKEY);
+    }
+
     public Observable<Weather> weatherAll(final String city) {
         return sWeatherAllApi.weatherAll(city, Const.WEATHERKEY).flatMap(new Function<WeatherApi, ObservableSource<WeatherApi>>() {
 
@@ -78,7 +83,7 @@ public class RetrofitSingleton {
                 if ("no more requests".equals(status)) {
                     return Observable.error(new RuntimeException("次数已经用完了"));
                 } else if ("unknown city".equals(status)) {
-                    return Observable.error(new RuntimeException(String.format("没有找到%s",city)));
+                    return Observable.error(new RuntimeException(String.format("没有找到%s", city)));
                 }
                 return Observable.just(weatherApi);
             }
@@ -92,7 +97,8 @@ public class RetrofitSingleton {
             public void accept(@NonNull Throwable throwable) throws Exception {
                 disposeFailureInfo(throwable);
             }
-        }).compose(RxUtil.<Weather>io());
+        }).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io());
+
     }
 
     private static Consumer<Throwable> disposeFailureInfo(final Throwable t) {
