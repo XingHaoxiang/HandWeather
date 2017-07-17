@@ -1,4 +1,4 @@
-package com.xinghx.handweather.modules;
+package com.xinghx.handweather.modules.about;
 
 import com.xinghx.handweather.base.BaseActivity;
 

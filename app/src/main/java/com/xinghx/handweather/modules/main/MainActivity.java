@@ -1,4 +1,4 @@
-package com.xinghx.handweather;
+package com.xinghx.handweather.modules.main;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -6,7 +6,9 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.xinghx.handweather.R;
 import com.xinghx.handweather.base.BaseActivity;
+import com.xinghx.handweather.network.RetrofitSingleton;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,7 +26,7 @@ public class MainActivity extends BaseActivity {
         ButterKnife.bind(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        RetrofitSingleton.getInstance().weatherAll("石家庄");
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
