@@ -1,5 +1,7 @@
 package com.xinghx.handweather.base;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 
 /**
@@ -8,4 +10,5 @@ import android.support.v7.app.AppCompatActivity;
  */
 
 public class BaseActivity extends AppCompatActivity {
+
 }

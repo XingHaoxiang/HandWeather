@@ -2,9 +2,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.xinghx.handweather.modules.main.MainActivity">
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/nav_city"
+            android:title="@string/choose_city"
+            />
+        <item android:id="@+id/aboutMe"
+            android:title="@string/about"
+            />
+    </group>
+
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+        android:title="@string/app_name"
+        >
+
+        <menu>
+            <item
+                android:id="@+id/settings"
+                android:title="@string/setting"
+                />
+        </menu>
+    </item>
 </menu>
