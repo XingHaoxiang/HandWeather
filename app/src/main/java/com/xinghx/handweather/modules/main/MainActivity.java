@@ -47,6 +47,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             }
         });
 
+
+
     }
 
     private void initDrawer() {
